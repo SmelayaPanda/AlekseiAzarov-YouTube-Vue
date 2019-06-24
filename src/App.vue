@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <router-view/>
+        Each lesson in separate branch
     </div>
 </template>
 

@@ -1,12 +1,10 @@
 <template>
     <div id="app">
-        Each lesson in separate branch
+        <router-view></router-view>
     </div>
 </template>
 
 <style lang="scss">
-    @import "assets/index";
-
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;

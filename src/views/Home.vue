@@ -2,7 +2,6 @@
     <div class="row justify-content-center pt-5">
         <div class="col-12 text-left" style="max-width: 300px">
 
-
             <BaseInput
                 v-model="value"
                 id="base_input"
@@ -19,7 +18,6 @@
                 @blur="onBlur"
                 @submit="onSubmit"
                 @keyup.esc.native="onEscape"/>
-
 
         </div>
     </div>
@@ -38,27 +36,27 @@
         },
         methods: {
             onInput(val) {
-                console.log('onInput', val)
+                // console.log('onInput', val)
             },
 
             onChange(val) {
-                console.log('onChange', val)
+                // console.log('onChange', val)
             },
 
             onFocus() {
-                console.log('onFocus')
+                // console.log('onFocus')
             },
 
             onBlur() {
-                console.log('onBlur')
+                // console.log('onBlur')
             },
 
             onEscape() {
-                console.log('onEscape')
+                // console.log('onEscape')
             },
 
             onSubmit() {
-                console.log('onSubmit')
+                // console.log('onSubmit')
             }
         }
     }

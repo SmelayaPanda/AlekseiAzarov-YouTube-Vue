@@ -39,10 +39,6 @@
     export default {
         name: 'BaseInput',
         props: {
-            label: {
-                type: String,
-                required: false
-            },
             value: {
                 type: [String, Number, Date],
                 required: true
@@ -86,6 +82,10 @@
                 type: Boolean,
                 required: false,
                 default: false
+            },
+            label: { // not input attrs
+                type: String,
+                required: false
             }
         },
         data() {

@@ -4,14 +4,7 @@
         <label class="d-block mb-0">
             {{ label }}
             <input
-                :id="id"
-                :type="type"
-                :value="value"
-                :required="required"
-                :disabled="disabled"
-                :placeholder="placeholder"
-                :autofocus="autofocus"
-                :autocomplete="autocomplete"
+                v-bind="$attrs"
                 @input="onInput"
                 @change="onChange"
                 @focus="onFocus"
@@ -37,52 +30,9 @@
 
 <script>
     export default {
-        name: 'BaseInput',
+        name: 'BaseInput', // Base | App | V + [name]
+        inheritAttrs: false,
         props: {
-            value: {
-                type: [String, Number, Date],
-                required: true
-            },
-            placeholder: {
-                type: String,
-                required: false,
-                default: 'Enter a value'
-            },
-            id: {
-                type: String,
-                required: false
-            },
-            type: {
-                type: String,
-                default: 'text',
-                validator: function (value) {
-                    return ['text', 'email', 'number', 'date', 'password', 'url']
-                        .indexOf(value) !== -1
-                }
-            },
-            required: {
-                type: Boolean,
-                required: false,
-                default: false
-            },
-            autofocus: {
-                type: Boolean,
-                required: false,
-                default: false
-            },
-            autocomplete: {
-                type: String,
-                required: false,
-                default: 'on',
-                validator: function (value) {
-                    return ['on', 'off'].indexOf(value) !== -1
-                }
-            },
-            disabled: {
-                type: Boolean,
-                required: false,
-                default: false
-            },
             label: { // not input attrs
                 type: String,
                 required: false

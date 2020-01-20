@@ -4,6 +4,7 @@
 
             <BaseInput
                 v-model="value"
+                panda="🐼"
                 id="base_input"
                 type="text"
                 label="First input"

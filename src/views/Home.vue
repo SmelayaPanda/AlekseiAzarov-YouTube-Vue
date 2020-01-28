@@ -2,63 +2,25 @@
     <div class="row justify-content-center pt-5">
         <div class="col-12 text-left" style="max-width: 300px">
 
-            <BaseInput
-                v-model="value"
-                panda="🐼"
-                id="base_input"
-                type="text"
-                label="First input"
-                placeholder="Type..."
-                class="text-success"
-                autocomplete="off"
-                :autofocus="false"
-                :required="true"
-                :disabled="false"
-                @change="onChange"
-                @focus="onFocus"
-                @blur="onBlur"
-                @submit="onSubmit"
-                @keyup.esc.native="onEscape"/>
+
+            <ItemList/>
+
 
         </div>
     </div>
 </template>
 
 <script>
-    import BaseInput from '@/components/BaseInput'
+    import ItemList from '@/components/ItemList'
 
     export default {
         name: 'Home',
-        components: {BaseInput},
+        components: {ItemList},
         data() {
             return {
                 value: ''
             }
         },
-        methods: {
-            onInput(val) {
-                // console.log('onInput', val)
-            },
-
-            onChange(val) {
-                // console.log('onChange', val)
-            },
-
-            onFocus() {
-                // console.log('onFocus')
-            },
-
-            onBlur() {
-                // console.log('onBlur')
-            },
-
-            onEscape() {
-                // console.log('onEscape')
-            },
-
-            onSubmit() {
-                // console.log('onSubmit')
-            }
-        }
+        methods: {}
     }
 </script>

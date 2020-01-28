@@ -1,2 +1,0 @@
-// class: {}, - is a reserved attribute and cannot be used as component prop
-// style: {}, - is a reserved attribute and cannot be used as component prop

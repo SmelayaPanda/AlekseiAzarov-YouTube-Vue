@@ -3,7 +3,7 @@
         <div class="col-12 text-left" style="max-width: 300px">
 
 
-            <ItemList/>
+            <ItemList :title="title" @click.native="updateTitle"/>
 
 
         </div>
@@ -18,9 +18,13 @@
         components: {ItemList},
         data() {
             return {
-                value: ''
+                title: 'Click me to update'
             }
         },
-        methods: {}
+        methods: {
+            updateTitle( ) {
+                this.title = new Date().toLocaleString()
+            }
+        }
     }
 </script>

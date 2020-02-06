@@ -4,7 +4,7 @@
         <div class="media-body">
             <h6 class="mt-0 mb-1">
                 {{ item.id }}.
-                {{ item.title }}
+                {{ getTitle(item) }}
             </h6>
         </div>
     </li>
@@ -19,7 +19,13 @@
                 required: true
             }
         },
-        updated() {
+        methods: {
+            getTitle(item) {
+                console.log(item.id)
+                return item.title.toLowerCase()
+            }
+        },
+        beforeUpdate() {
             console.log('updated', this.item.id)
         }
     }

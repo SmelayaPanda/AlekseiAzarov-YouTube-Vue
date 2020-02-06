@@ -1,26 +1,40 @@
 <template>
-    <ul class="">
-
+    <ul>
         <li>
-            <h5>
-                {{ title }}
+            <h5 @click="onTitleClick">
+                {{ date }}
             </h5>
         </li>
 
+        <!--                v-if="!item.isUpdated"-->
+
+        <li v-for="item in items"
+            v-if="!item.isUpdated"
+            :key="item.id"
+            @click="onItemClick(item)"
+            class="media my-3">
+<!--            <img :src="item.url" class="item-image mr-3" :alt="item.title">-->
+            <div class="media-body">
+                <h6 class="mt-0 mb-1">
+                    {{ item.id }}.
+                    {{ getTitle(item) }}
+                </h6>
+            </div>
+        </li>
 
         <!-- 1 -->
-        <Item v-for="item in items"
-              v-if="!item.isUpdated"
-              :key="item.id"
-              :item="item"
-              @click.native="onItemClick(item)"/>
-
-
-        <!-- 2 -->
-        <!--        <Item v-for="item in filteredItems"-->
+        <!--        <Item v-for="item in items"-->
+        <!--              v-if="!item.isUpdated"-->
         <!--              :key="item.id"-->
         <!--              :item="item"-->
         <!--              @click.native="onItemClick(item)"/>-->
+
+
+        <!-- 2 -->
+        <!--                <Item v-for="item in filteredItems"-->
+        <!--                      :key="item.id"-->
+        <!--                      :item="item"-->
+        <!--                      @click.native="onItemClick(item)"/>-->
     </ul>
 </template>
 
@@ -30,14 +44,11 @@
     export default {
         name: 'ItemList',
         components: {Item},
-        props: {
-            title: {
-                type: String
-            }
-        },
         data() {
             return {
-                items: []
+                items: [],
+
+                date: new Date()
             }
         },
         computed: {
@@ -47,19 +58,40 @@
         },
         methods: {
             onItemClick(item) {
+                console.log('Item click')
                 item.isUpdated = true
+            },
+
+            onTitleClick(item) {
+                console.log('Title click')
+                this.date = new Date()
+            },
+
+            getTitle(item) {
+                // console.log(item.id)
+                return item.title.toLowerCase()
             }
         },
         async created() {
             const items = await (await fetch('https://jsonplaceholder.typicode.com/photos')).json()
-            this.items = items.map(item => ({...item, isUpdated: false})).slice(0, 100)
+            this.items = items.map(item => ({...item, isUpdated: false}))
         },
-        updated() {
+        updated(params) {
             console.log('list updated')
         }
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    .item-image {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
 
+    .media {
+        &:hover {
+            cursor: pointer;
+        }
+    }
 </style>

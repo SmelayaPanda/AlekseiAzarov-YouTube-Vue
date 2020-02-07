@@ -1,30 +1,18 @@
 <template>
-    <div class="row justify-content-center pt-5">
-        <div class="col-12 text-left" style="max-width: 300px">
+    <div class="row justify-content-center pt-5 mx-0">
+        <div class="col-12 text-center">
 
-
-            <ItemList :title="title" @click.native="updateTitle"/>
-
+            <Snake :bound="400" :cell="50" :speed="500"/>
 
         </div>
     </div>
 </template>
 
 <script>
-    import ItemList from '@/components/ItemList'
+    import Snake from '@/components/Snake'
 
     export default {
         name: 'Home',
-        components: {ItemList},
-        data() {
-            return {
-                title: 'Click me to update'
-            }
-        },
-        methods: {
-            updateTitle( ) {
-                this.title = new Date().toLocaleString()
-            }
-        }
+        components: {Snake}
     }
 </script>

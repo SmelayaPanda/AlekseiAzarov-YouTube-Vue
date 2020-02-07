@@ -1,9 +1,11 @@
 <template>
-    <div class="row justify-content-center pt-5 mx-0">
-        <div class="col-12 text-center">
+    <div class=" pt-5 mx-0 vh-100">
+        <div class="text-center">
+            <div class="d-inline-block" style="border: 2px solid darkgrey">
 
-            <Snake :bound="400" :cell="50" :speed="500"/>
+                <Snake :bound="400" :cell="25" :speed="100"/>
 
+            </div>
         </div>
     </div>
 </template>

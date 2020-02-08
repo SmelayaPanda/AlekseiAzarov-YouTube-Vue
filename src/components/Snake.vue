@@ -25,7 +25,8 @@
                 }
                 if ((this.p[0][0] < 0 || this.p[0][1] < 0 || this.p[0][0] >= this.bound || this.p[0][1] >= this.bound) || // 1. bound rect
                     ([...new Set(this.p.slice(0, this.score).map(i => i[0] + '' + i[1]))].length !== this.p.slice(0, this.score).length)) { // 2. self crash
-                    alert(`Game over. Your score ${this.score}`)
+                    this.$emit('game-over', this.score)
+                    // alert(`Game over. Your score ${this.score}`)
                     clearInterval(interval)
                 }
             }, this.speed)

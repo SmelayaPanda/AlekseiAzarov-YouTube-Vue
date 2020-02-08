@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "firebase": "^7.8.1",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
@@ -44,9 +45,18 @@
       "@vue/standard"
     ],
     "rules": {
-      "indent": ["error", 4],
-      "vue/html-indent": ["error", 4],
-      "vue/script-indent": ["error", 4]
+      "indent": [
+        "error",
+        4
+      ],
+      "vue/html-indent": [
+        "error",
+        4
+      ],
+      "vue/script-indent": [
+        "error",
+        4
+      ]
     },
     "parserOptions": {
       "parser": "babel-eslint"

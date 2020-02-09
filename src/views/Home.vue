@@ -63,7 +63,7 @@
                                 </span>
                             </span>
                             <span v-else>
-                                {{ item.uid }}
+                                {{ item.name || item.uid }}
                             </span>
                         </small>
                         <strong class="float-right">

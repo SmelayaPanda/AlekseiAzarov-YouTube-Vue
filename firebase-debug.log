@@ -1,0 +1,70 @@
+[debug] [2020-02-09T17:56:32.464Z] ----------------------------------------------------------------------
+[debug] [2020-02-09T17:56:32.466Z] Command:       /Users/panda/.nvm/versions/node/v13.2.0/bin/node /Users/panda/.nvm/versions/node/v13.2.0/bin/firebase deploy
+[debug] [2020-02-09T17:56:32.466Z] CLI Version:   7.8.1
+[debug] [2020-02-09T17:56:32.466Z] Platform:      darwin
+[debug] [2020-02-09T17:56:32.466Z] Node Version:  v13.2.0
+[debug] [2020-02-09T17:56:32.468Z] Time:          Mon Feb 10 2020 00:56:32 GMT+0700 (Novosibirsk Standard Time)
+[debug] [2020-02-09T17:56:32.469Z] ----------------------------------------------------------------------
+[debug] [2020-02-09T17:56:32.469Z] 
+[debug] [2020-02-09T17:56:32.477Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-02-09T17:56:32.477Z] > authorizing via signed-in user
+[debug] [2020-02-09T17:56:32.477Z] [iam] checking project snakegame-alekseyazarov for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-02-09T17:56:32.478Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-02-09T17:56:32.478Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-02-09T17:56:32.823Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-09T17:56:32.844Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/snakegame-alekseyazarov:testIamPermissions  
+
+[debug] [2020-02-09T17:56:34.148Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-09T17:56:34.150Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/snakegame-alekseyazarov  
+ 
+[debug] [2020-02-09T17:56:34.967Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'snakegame-alekseyazarov'...
+[info] 
+[info] i  deploying hosting
+[debug] [2020-02-09T17:56:34.970Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/snakegame-alekseyazarov/versions  
+
+[debug] [2020-02-09T17:56:36.834Z] <<< HTTP RESPONSE 200
+[info] i  hosting[snakegame-alekseyazarov]: beginning deploy...
+[info] i  hosting[snakegame-alekseyazarov]: found 16 files in dist
+[debug] [2020-02-09T17:56:37.409Z] [hosting] hash cache [ZGlzdA] stored for 16 files
+[debug] [2020-02-09T17:56:37.409Z] [hosting][hash queue][FINAL]
+[debug] [2020-02-09T17:56:37.409Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/snakegame-alekseyazarov/versions/a2cc14100a01179d:populateFiles  
+ <request body omitted>
+[debug] [2020-02-09T17:56:38.965Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-09T17:56:38.971Z] [hosting][populate queue][FINAL]
+[debug] [2020-02-09T17:56:38.971Z] [hosting] uploads queued: 6
+[debug] [2020-02-09T17:56:42.299Z] [hosting][upload queue][FINAL]
+[info] ✔  hosting[snakegame-alekseyazarov]: file upload complete
+[debug] [2020-02-09T17:56:42.300Z] [hosting] deploy completed after 5465ms
+[debug] [2020-02-09T17:56:42.567Z] [
+  {
+    "config": {
+      "public": "dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "snakegame-alekseyazarov"
+    },
+    "site": "snakegame-alekseyazarov",
+    "version": "sites/snakegame-alekseyazarov/versions/a2cc14100a01179d"
+  }
+]
+[info] i  hosting[snakegame-alekseyazarov]: finalizing version...
+[debug] [2020-02-09T17:56:42.568Z] >>> HTTP REQUEST PATCH https://firebasehosting.googleapis.com/v1beta1/sites/snakegame-alekseyazarov/versions/a2cc14100a01179d?updateMask=status  
+
+[debug] [2020-02-09T17:56:43.953Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-09T17:56:43.954Z] [hosting] finalized version for snakegame-alekseyazarov:
+[info] ✔  hosting[snakegame-alekseyazarov]: version finalized
+[info] i  hosting[snakegame-alekseyazarov]: releasing new version...
+[debug] [2020-02-09T17:56:43.954Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/snakegame-alekseyazarov/releases?version_name=sites/snakegame-alekseyazarov/versions/a2cc14100a01179d  
+

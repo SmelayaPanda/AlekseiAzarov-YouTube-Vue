@@ -43,7 +43,8 @@
                         <br>
                     </div>
                     <br>
-                    <a href="https://www.youtube.com/channel/UCJh2pGEkh1Y9hkf_LHMVn9A/featured?view_as=subscriber" target="_blank">
+                    <a href="https://www.youtube.com/channel/UCJh2pGEkh1Y9hkf_LHMVn9A/featured?view_as=subscriber"
+                       target="_blank">
                         YouTube
                     </a>
                 </div>
@@ -177,6 +178,8 @@
                         .collection('users')
                         .doc(firebase.auth().currentUser.uid || Math.random())
                         .set({email, score, date: firebase.firestore.FieldValue.serverTimestamp()})
+                    this.$set(this.user, 'score', score)
+                    this.$set(this.user, 'email', email)
                 }
                 this.gameKey = Math.random()
             },

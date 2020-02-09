@@ -128,12 +128,13 @@
             fetchUsers() {
                 firebase.firestore()
                     .collection('users')
-                    .orderBy('score', 'asc')
                     .onSnapshot(users => {
-                        this.users = []
+                        const arr = []
                         users.forEach(doc => {
-                            this.users.push({uid: doc.id, ...doc.data()})
+                            arr.push({uid: doc.id, ...doc.data()})
                         })
+
+                        this.users = arr.sort((a,b) => b.score - a.score)
                     })
             },
 

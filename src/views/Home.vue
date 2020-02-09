@@ -128,7 +128,7 @@
             fetchUsers() {
                 firebase.firestore()
                     .collection('users')
-                    .orderBy('score', 'desc')
+                    .orderBy('score', 'asc')
                     .onSnapshot(users => {
                         this.users = []
                         users.forEach(doc => {
@@ -169,19 +169,18 @@
                             `, '@gmail.com')
                         }
                     }
+                    if (email) {
+                        firebase.firestore()
+                            .collection('users')
+                            .doc(firebase.auth().currentUser.uid || Math.random())
+                            .set({email, score, date: firebase.firestore.FieldValue.serverTimestamp()})
+                        this.$set(this.user, 'score', score)
+                        this.$set(this.user, 'email', email)
+                    }
+                    this.gameKey = Math.random()
                 } else {
                     alert('Что-то пошло не так, не могу сохранить ваши данные. Напишите на SmelayaPandaGm@gmail.com')
                 }
-
-                if (email) {
-                    firebase.firestore()
-                        .collection('users')
-                        .doc(firebase.auth().currentUser.uid || Math.random())
-                        .set({email, score, date: firebase.firestore.FieldValue.serverTimestamp()})
-                    this.$set(this.user, 'score', score)
-                    this.$set(this.user, 'email', email)
-                }
-                this.gameKey = Math.random()
             },
 
             fetchCurrency() {

@@ -43,6 +43,7 @@
                         <br>
                     </div>
                     <br>
+
                     <a href="https://www.youtube.com/channel/UCJh2pGEkh1Y9hkf_LHMVn9A/featured?view_as=subscriber"
                        target="_blank">
                         YouTube
@@ -55,7 +56,15 @@
                             {{ idx + 1 }}
                         </small>
                         <small>
-                            {{ user && user.uid === item.uid ? 'Вы' : item.uid }}
+                            <span v-if="user && user.uid === item.uid">
+                                {{ user.name || 'Вы' }}
+                                <span @click="editName" class="edit-icon">
+                                    <img height="18" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAACGUlEQVR4nO3avYoUQQBF4aOBgQ9gbCgKvoWRCGaiLyIIizf0VQQDA8HYSFNzEVPNDBYDYddocVGXnZmu7mvPnA8q7J6qU13N7A9IkiRJOjRX2hNYgbvAQ+AecBO4AXwHvgLvgTfAW+BnaX576zbwGjjdYHwCnuADPcwj4JjN4p8fL4HrhfnulSO2D39+fMBN2FmYFv9svMLX0dbCmPhn4/Gis1+5MDb+KfAZuLbgGlYrjI9/Nh5c9uFXR65kpX7MeO/7M957r4R5TsDHBdewek8ZvwHfFl3BHghjN2DO19veGnkSviw79f0RxmzAu4Xn/d8K8GLLa0achGfTp75+4XeQTLh223EC3Jk499ULf4dZ6iS8mjz7lQsXx8nAe/1rHAO3pk1/3cLlkeY6CScc+C/iwuZPama499G06a9b2P5dPfIkPJ+6gDULu39jGbEJxp84pmyC8QeN7PDZ216zV8K4+LuehIMVxsd3EzYU5ovvJlwizB/fTbhAWC6+m/CHsHz82TdhLf8VEbrftQ/6T4uh9+Sf4g9Zxm8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8yfpnxy4xfZvwy45cZv8z4ZcYvM36Z8cuMX2b8MuOXGb/M+GXGlyRJkiRJknbwC+2jYyljORpZAAAAAElFTkSuQmCC">
+                                </span>
+                            </span>
+                            <span v-else>
+                                {{ item.uid }}
+                            </span>
                         </small>
                         <strong class="float-right">
                             {{ item.score }}
@@ -63,7 +72,7 @@
                     </li>
                 </ul>
 
-                <div v-else-if="activeView === views.code.key">
+                <div v-else-if="activeView === views.code.key" class="mt-3">
                     <a href="https://gist.github.com/SmelayaPanda/ed5db80a8af5a90a9885de64782aa247" target="_blank">
                         Исходный код
                     </a>
@@ -170,7 +179,7 @@
                             `, '@gmail.com')
                         }
                     }
-                    if (email) {
+                    if (email && email.length < 120) {
                         firebase.firestore()
                             .collection('users')
                             .doc(firebase.auth().currentUser.uid || Math.random())
@@ -191,6 +200,17 @@
                             this.usd = Number(res.data.USD_RUB)
                         }
                     })
+            },
+
+            editName() {
+                const name = prompt('Введите имя')
+                if (name && name.length < 120) {
+                    firebase.firestore()
+                        .collection('users')
+                        .doc(firebase.auth().currentUser.uid)
+                        .update({name})
+                    this.$set(this.user, 'name', name)
+                }
             }
         },
         mounted() {
@@ -246,6 +266,12 @@
         width: 404px;
         padding: 8px;
 
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .edit-icon {
         &:hover {
             cursor: pointer;
         }

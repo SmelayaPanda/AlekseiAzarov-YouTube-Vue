@@ -16,14 +16,14 @@ import 'firebase/firestore'
 Vue.config.productionTip = false
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyD7vGWoUR3qyQ8g2BDRb4UeHCMedEqHHVc',
-    authDomain: 'snake-23feb2020.firebaseapp.com',
-    databaseURL: 'https://snake-23feb2020.firebaseio.com',
-    projectId: 'snake-23feb2020',
-    storageBucket: 'snake-23feb2020.appspot.com',
-    messagingSenderId: '185136299368',
-    appId: '1:185136299368:web:26ce72053d43c8a09f2add',
-    measurementId: 'G-JDJHJ2G3DG'
+    apiKey: "AIzaSyCfKDQyrgsy1QpZjJQAfZ5dRz55MyyfJao",
+    authDomain: "snakegame-alekseyazarov.firebaseapp.com",
+    databaseURL: "https://snakegame-alekseyazarov.firebaseio.com",
+    projectId: "snakegame-alekseyazarov",
+    storageBucket: "snakegame-alekseyazarov.appspot.com",
+    messagingSenderId: "1014708943943",
+    appId: "1:1014708943943:web:87c2dba259bd1985dc8562",
+    measurementId: "G-76W0DQB1C6"
 }
 firebase.initializeApp(firebaseConfig)
 

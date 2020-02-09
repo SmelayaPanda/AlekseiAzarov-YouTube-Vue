@@ -57,9 +57,13 @@
                         </small>
                         <small>
                             <span v-if="user && user.uid === item.uid">
-                                {{ user.name || 'Вы' }}
+                                <strong v-if="user.name">
+                                    {{ user.name }}
+                                </strong>
+                                <strong v-else>Вы</strong>
                                 <span @click="editName" class="edit-icon">
-                                    <img height="18" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAACGUlEQVR4nO3avYoUQQBF4aOBgQ9gbCgKvoWRCGaiLyIIizf0VQQDA8HYSFNzEVPNDBYDYddocVGXnZmu7mvPnA8q7J6qU13N7A9IkiRJOjRX2hNYgbvAQ+AecBO4AXwHvgLvgTfAW+BnaX576zbwGjjdYHwCnuADPcwj4JjN4p8fL4HrhfnulSO2D39+fMBN2FmYFv9svMLX0dbCmPhn4/Gis1+5MDb+KfAZuLbgGlYrjI9/Nh5c9uFXR65kpX7MeO/7M957r4R5TsDHBdewek8ZvwHfFl3BHghjN2DO19veGnkSviw79f0RxmzAu4Xn/d8K8GLLa0achGfTp75+4XeQTLh223EC3Jk499ULf4dZ6iS8mjz7lQsXx8nAe/1rHAO3pk1/3cLlkeY6CScc+C/iwuZPama499G06a9b2P5dPfIkPJ+6gDULu39jGbEJxp84pmyC8QeN7PDZ216zV8K4+LuehIMVxsd3EzYU5ovvJlwizB/fTbhAWC6+m/CHsHz82TdhLf8VEbrftQ/6T4uh9+Sf4g9Zxm8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8yfpnxy4xfZvwy45cZv8z4ZcYvM36Z8cuMX2b8MuOXGb/M+GXGlyRJkiRJknbwC+2jYyljORpZAAAAAElFTkSuQmCC">
+                                    <img height="18"
+                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAACGUlEQVR4nO3avYoUQQBF4aOBgQ9gbCgKvoWRCGaiLyIIizf0VQQDA8HYSFNzEVPNDBYDYddocVGXnZmu7mvPnA8q7J6qU13N7A9IkiRJOjRX2hNYgbvAQ+AecBO4AXwHvgLvgTfAW+BnaX576zbwGjjdYHwCnuADPcwj4JjN4p8fL4HrhfnulSO2D39+fMBN2FmYFv9svMLX0dbCmPhn4/Gis1+5MDb+KfAZuLbgGlYrjI9/Nh5c9uFXR65kpX7MeO/7M957r4R5TsDHBdewek8ZvwHfFl3BHghjN2DO19veGnkSviw79f0RxmzAu4Xn/d8K8GLLa0achGfTp75+4XeQTLh223EC3Jk499ULf4dZ6iS8mjz7lQsXx8nAe/1rHAO3pk1/3cLlkeY6CScc+C/iwuZPama499G06a9b2P5dPfIkPJ+6gDULu39jGbEJxp84pmyC8QeN7PDZ216zV8K4+LuehIMVxsd3EzYU5ovvJlwizB/fTbhAWC6+m/CHsHz82TdhLf8VEbrftQ/6T4uh9+Sf4g9Zxm8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8yfpnxy4xfZvwy45cZv8z4ZcYvM36Z8cuMX2b8MuOXGb/M+GXGlyRJkiRJknbwC+2jYyljORpZAAAAAElFTkSuQmCC">
                                 </span>
                             </span>
                             <span v-else>
@@ -143,7 +147,7 @@
                             arr.push({uid: doc.id, ...doc.data()})
                         })
 
-                        this.users = arr.sort((a,b) => b.score - a.score)
+                        this.users = arr.sort((a, b) => b.score - a.score)
                     })
             },
 
@@ -183,10 +187,14 @@
                         firebase.firestore()
                             .collection('users')
                             .doc(firebase.auth().currentUser.uid || Math.random())
-                            .set({email, score, date: firebase.firestore.FieldValue.serverTimestamp()})
+                            .set({email, score, date: firebase.firestore.FieldValue.serverTimestamp()}, {merge: true})
                         this.$set(this.user, 'score', score)
                         this.$set(this.user, 'email', email)
                     }
+                    firebase.firestore()
+                        .collection('users')
+                        .doc(firebase.auth().currentUser.uid || Math.random())
+                        .set({counter: firebase.firestore.FieldValue.increment(1)}, {merge: true})
                     this.gameKey = Math.random()
                 } else {
                     alert('Что-то пошло не так, не могу сохранить ваши данные. Напишите на SmelayaPandaGm@gmail.com')

@@ -1,49 +1,60 @@
 <template>
-    <div class="row text-center pt-4 mx-0">
+    <div class="row text-center py-4 mx-0">
         <div class="col-12 text-center">
             <div class="d-inline-block" style="border: 2px solid darkgrey">
                 <Snake @game-over="onGameOver"
                        :key="gameKey"
-                       :bound="360"
-                       :cell="20"
+                       :bound="400"
+                       :cell="25"
                        :speed="200"/>
             </div>
 
             <template v-if="!isStarted">
                 <div @click="start"
                      class="border bg-success text-white mx-auto mt-2 start-btn">
-                    Старт
+                    <h4>Старт</h4>
+
+                    <div v-if="rank" class="my-2">
+                        <small>Сейчас вы на <b>{{ rank }}</b> месте из <b>{{ users.length }}</b> участников</small>
+                    </div>
                 </div>
-                <div class="row views border">
+
+                <div class="row views border mb-1">
                     <div v-for="view in views" :key="view.key"
                          @click="activeView = view.key"
-                         :class="{'bg-secondary text-white': view.key === activeView}"
+                         :class="{ 'bg-secondary text-white': view.key === activeView }"
                          class="col view-tab p-2">
                         {{ view.label }}
                     </div>
                 </div>
 
                 <div v-if="activeView === views.info.key">
-                    <h3>Vue Snake Game</h3>
+                    <h3 class="mt-3">Vue Snake Game</h3>
                     <div>Победителю $8 <span class="text-muted">USD</span></div>
-                    <small>[ 8 * {{ usd }} = {{ usd * 8 }} рублей ]</small>
-
+                    <small>[ $8 * {{ usd }} = {{ usd * 8 }} рублей ]</small>
                     <br>
                     <div class="text-muted">
-                        <small>Результаты - 8 марта 2020г. 12:00 дня по МСК</small> <br>
-                        <small>Набравших одинаковое кол-во очков рассудит рандом</small> <br>
-                        <small>🎉 Потратьте деньги на букет 💐цветов 😀</small>
+                        <small>Результаты - 8 марта 2020г. 12:00 дня по МСК</small>
+                        <br>
+                        <small>Набравших одинаковое кол-во очков рассудит рандом</small>
+                        <br>
+                        <br>
+                        <small class="text-info">
+                            Desktop web-browser version
+                        </small>
                     </div>
                 </div>
                 <ul v-else-if="activeView === views.rating.key" class="list-group">
-                    <li v-for="(user, idx) in users" :key="user.uid" class="list-group-item text-left">
+                    <li v-for="(item, idx) in users" :key="item.uid" class="list-group-item text-left">
                         <small class="badge badge-secondary mr-2"
                                :class="idx === 0 ? 'badge-success' : 'badge-secondary'">
                             {{ idx + 1 }}
                         </small>
-                        <small class="">{{ user.uid }}</small>
+                        <small>
+                            {{ user && user.uid === item.uid ? 'Вы' : item.uid }}
+                        </small>
                         <strong class="float-right">
-                            {{ user.score }}
+                            {{ item.score }}
                         </strong>
                     </li>
                 </ul>
@@ -71,6 +82,7 @@
             return {
                 isStarted: false,
                 gameKey: 1,
+                user: null,
                 users: [],
                 showRating: false,
 
@@ -89,6 +101,15 @@
                         key: 'code',
                         label: 'Код'
                     }
+                }
+            }
+        },
+        computed: {
+            rank() {
+                if (this.user && this.user.uid && this.user.score) {
+                    return 1 + this.users.findIndex(u => u.uid === this.user.uid)
+                } else {
+                    return -1
                 }
             }
         },
@@ -164,6 +185,20 @@
         mounted() {
             this.fetchUsers()
             // this.fetchCurrency()
+
+            firebase.auth().onAuthStateChanged(async user => {
+                this.user = user || null
+                if (user) {
+                    const data = await firebase
+                        .firestore()
+                        .collection('users')
+                        .doc(firebase.auth().currentUser.uid)
+                        .get()
+                    this.user = data.exists ? {...user, ...data.data()} : user
+                } else {
+                    this.user = null
+                }
+            })
         }
     }
 </script>
@@ -171,7 +206,7 @@
 <style lang="scss" scoped>
     .views {
         margin: 16px auto;
-        max-width: 364px;
+        max-width: 404px;
 
         .view-tab {
             &:hover {
@@ -182,13 +217,13 @@
 
     .list-group {
         margin: 0 auto;
-        max-width: 364px;
+        max-width: 404px;
         max-height: 300px;
         overflow-y: auto;
     }
 
     .start-btn {
-        width: 364px;
+        width: 404px;
         padding: 8px;
 
         &:hover {

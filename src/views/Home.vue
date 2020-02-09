@@ -1,51 +1,60 @@
 <template>
-    <div class="row text-center pt-5 mx-0">
+    <div class="row text-center pt-4 mx-0">
         <div class="col-12 text-center">
-
             <div class="d-inline-block" style="border: 2px solid darkgrey">
                 <Snake @game-over="onGameOver"
                        :key="gameKey"
-                       :bound="400"
-                       :cell="25"
+                       :bound="360"
+                       :cell="20"
                        :speed="200"/>
             </div>
 
-
-            <div class="row views border">
-                <div v-for="view in views" :key="view.key"
-                     @click="activeView = view.key"
-                     :class="{'bg-secondary text-white': view.key === activeView}"
-                     class="col view-tab p-2">
-                    {{ view.label }}
+            <template v-if="!isStarted">
+                <div @click="start"
+                     class="border bg-success text-white mx-auto mt-2 start-btn">
+                    Старт
                 </div>
-            </div>
-
-            <div v-if="activeView === views.info.key">
-                <div>Победителю $8 <span class="text-muted">USD</span></div>
-                <small>[ 8 * {{ usd }} = {{ usd * 8 }} рублей ]</small>
-
-                <br>
-                <div class="text-muted">
-                    <small>Результаты - 8 марта 2020г. 12:00 дня по МСК</small> <br>
-                    <small>Набравших одинаковое кол-во очков рассудит рандом</small>
+                <div class="row views border">
+                    <div v-for="view in views" :key="view.key"
+                         @click="activeView = view.key"
+                         :class="{'bg-secondary text-white': view.key === activeView}"
+                         class="col view-tab p-2">
+                        {{ view.label }}
+                    </div>
                 </div>
-            </div>
-            <ul v-else-if="activeView === views.rating.key" class="list-group">
-                <li v-for="(user, idx) in users" :key="user.uid" class="list-group-item text-left">
-                    <small class="badge badge-secondary mr-2" :class="idx === 0 ? 'badge-success' : 'badge-secondary'">
-                        {{ idx + 1 }}
-                    </small>
-                    <small class="">{{ user.uid }}</small>
-                    <strong class="float-right">
-                        {{ user.score }}
-                    </strong>
-                </li>
-            </ul>
 
-            <div v-else-if="activeView === views.code.key">
-                Исходный код:
-            </div>
+                <div v-if="activeView === views.info.key">
+                    <h3>Vue Snake Game</h3>
+                    <div>Победителю $8 <span class="text-muted">USD</span></div>
+                    <small>[ 8 * {{ usd }} = {{ usd * 8 }} рублей ]</small>
 
+                    <br>
+                    <div class="text-muted">
+                        <small>Результаты - 8 марта 2020г. 12:00 дня по МСК</small> <br>
+                        <small>Набравших одинаковое кол-во очков рассудит рандом</small> <br>
+                        <small>🎉 Потратьте деньги на букет 💐цветов 😀</small>
+                    </div>
+                </div>
+                <ul v-else-if="activeView === views.rating.key" class="list-group">
+                    <li v-for="(user, idx) in users" :key="user.uid" class="list-group-item text-left">
+                        <small class="badge badge-secondary mr-2"
+                               :class="idx === 0 ? 'badge-success' : 'badge-secondary'">
+                            {{ idx + 1 }}
+                        </small>
+                        <small class="">{{ user.uid }}</small>
+                        <strong class="float-right">
+                            {{ user.score }}
+                        </strong>
+                    </li>
+                </ul>
+
+                <div v-else-if="activeView === views.code.key">
+                    <a href="https://gist.github.com/SmelayaPanda/ed5db80a8af5a90a9885de64782aa247" target="_blank">
+                        Исходный код
+                    </a>
+                    <small>(* без ускорения после сьеденого яблока)</small>
+                </div>
+            </template>
         </div>
     </div>
 </template>
@@ -60,6 +69,7 @@
         components: {Snake},
         data() {
             return {
+                isStarted: false,
                 gameKey: 1,
                 users: [],
                 showRating: false,
@@ -83,6 +93,11 @@
             }
         },
         methods: {
+            start() {
+                this.isStarted = true
+                this.$emit('start')
+            },
+
             async fetchUsers() {
                 const users = await firebase.firestore().collection('users').orderBy('score').get()
                 users.forEach(doc => {
@@ -91,6 +106,7 @@
             },
 
             async onGameOver(score) {
+                this.isStarted = false
                 const user = await firebase
                     .firestore()
                     .collection('users')
@@ -155,7 +171,7 @@
 <style lang="scss" scoped>
     .views {
         margin: 16px auto;
-        max-width: 404px;
+        max-width: 364px;
 
         .view-tab {
             &:hover {
@@ -166,8 +182,17 @@
 
     .list-group {
         margin: 0 auto;
-        max-width: 404px;
+        max-width: 364px;
         max-height: 300px;
         overflow-y: auto;
+    }
+
+    .start-btn {
+        width: 364px;
+        padding: 8px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 </style>

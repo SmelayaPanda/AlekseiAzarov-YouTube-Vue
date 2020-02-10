@@ -53,31 +53,50 @@
                 </div>
                 <ul v-else-if="activeView === views.rating.key" class="list-group">
                     <li v-for="(item, idx) in users" :key="item.uid" class="list-group-item text-left">
-                        <div>
-                            <small class="badge badge-secondary mr-2"
-                                   :class="idx === 0 ? 'badge-success' : 'badge-secondary'">
-                                {{ idx + 1 }} <br> место
-                            </small>
-                            <small class="align-middle">
-                                <span v-if="user && user.uid === item.uid">
-                                    <strong v-if="user.name">
-                                        {{ user.name }}
-                                    </strong>
-                                    <strong v-else>Вы</strong>
-                                    <span @click="editName" class="edit-icon">
-                                        <img height="18"
-                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAACGUlEQVR4nO3avYoUQQBF4aOBgQ9gbCgKvoWRCGaiLyIIizf0VQQDA8HYSFNzEVPNDBYDYddocVGXnZmu7mvPnA8q7J6qU13N7A9IkiRJOjRX2hNYgbvAQ+AecBO4AXwHvgLvgTfAW+BnaX576zbwGjjdYHwCnuADPcwj4JjN4p8fL4HrhfnulSO2D39+fMBN2FmYFv9svMLX0dbCmPhn4/Gis1+5MDb+KfAZuLbgGlYrjI9/Nh5c9uFXR65kpX7MeO/7M957r4R5TsDHBdewek8ZvwHfFl3BHghjN2DO19veGnkSviw79f0RxmzAu4Xn/d8K8GLLa0achGfTp75+4XeQTLh223EC3Jk499ULf4dZ6iS8mjz7lQsXx8nAe/1rHAO3pk1/3cLlkeY6CScc+C/iwuZPama499G06a9b2P5dPfIkPJ+6gDULu39jGbEJxp84pmyC8QeN7PDZ216zV8K4+LuehIMVxsd3EzYU5ovvJlwizB/fTbhAWC6+m/CHsHz82TdhLf8VEbrftQ/6T4uh9+Sf4g9Zxm8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8yfpnxy4xfZvwy45cZv8z4ZcYvM36Z8cuMX2b8MuOXGb/M+GXGlyRJkiRJknbwC+2jYyljORpZAAAAAElFTkSuQmCC">
+                        <div class="row">
+                            <div class="col-2 align-self-center">
+                                <small class="badge badge-secondary mr-2"
+                                       :class="idx === 0 ? 'badge-success' : 'badge-secondary'">
+                                    {{ idx + 1 }} <br> место
+                                </small>
+                            </div>
+                            <div class="col-8 align-self-center">
+                                <small class="align-middle">
+                                    <span v-if="user && user.uid === item.uid">
+                                        <strong v-if="user.name">
+                                            {{ user.name }}
+                                        </strong>
+                                        <strong v-else>Вы</strong>
+                                        <span @click="editName" class="edit-icon">
+                                            <img height="18"
+                                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAACGUlEQVR4nO3avYoUQQBF4aOBgQ9gbCgKvoWRCGaiLyIIizf0VQQDA8HYSFNzEVPNDBYDYddocVGXnZmu7mvPnA8q7J6qU13N7A9IkiRJOjRX2hNYgbvAQ+AecBO4AXwHvgLvgTfAW+BnaX576zbwGjjdYHwCnuADPcwj4JjN4p8fL4HrhfnulSO2D39+fMBN2FmYFv9svMLX0dbCmPhn4/Gis1+5MDb+KfAZuLbgGlYrjI9/Nh5c9uFXR65kpX7MeO/7M957r4R5TsDHBdewek8ZvwHfFl3BHghjN2DO19veGnkSviw79f0RxmzAu4Xn/d8K8GLLa0achGfTp75+4XeQTLh223EC3Jk499ULf4dZ6iS8mjz7lQsXx8nAe/1rHAO3pk1/3cLlkeY6CScc+C/iwuZPama499G06a9b2P5dPfIkPJ+6gDULu39jGbEJxp84pmyC8QeN7PDZ216zV8K4+LuehIMVxsd3EzYU5ovvJlwizB/fTbhAWC6+m/CHsHz82TdhLf8VEbrftQ/6T4uh9+Sf4g9Zxm8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8yfpnxy4xfZvwy45cZv8z4ZcYvM36Z8cuMX2b8MuOXGb/M+GXGlyRJkiRJknbwC+2jYyljORpZAAAAAElFTkSuQmCC">
+                                            (имя)
+                                        </span>
+                                        <br>
+                                        <strong>{{ item.email || 'email' }}</strong>
+                                        <span @click="editEmail" class="edit-icon">
+                                            <img height="18"
+                                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAACGUlEQVR4nO3avYoUQQBF4aOBgQ9gbCgKvoWRCGaiLyIIizf0VQQDA8HYSFNzEVPNDBYDYddocVGXnZmu7mvPnA8q7J6qU13N7A9IkiRJOjRX2hNYgbvAQ+AecBO4AXwHvgLvgTfAW+BnaX576zbwGjjdYHwCnuADPcwj4JjN4p8fL4HrhfnulSO2D39+fMBN2FmYFv9svMLX0dbCmPhn4/Gis1+5MDb+KfAZuLbgGlYrjI9/Nh5c9uFXR65kpX7MeO/7M957r4R5TsDHBdewek8ZvwHfFl3BHghjN2DO19veGnkSviw79f0RxmzAu4Xn/d8K8GLLa0achGfTp75+4XeQTLh223EC3Jk499ULf4dZ6iS8mjz7lQsXx8nAe/1rHAO3pk1/3cLlkeY6CScc+C/iwuZPama499G06a9b2P5dPfIkPJ+6gDULu39jGbEJxp84pmyC8QeN7PDZ216zV8K4+LuehIMVxsd3EzYU5ovvJlwizB/fTbhAWC6+m/CHsHz82TdhLf8VEbrftQ/6T4uh9+Sf4g9Zxm8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8yfpnxy4xfZvwy45cZv8z4ZcYvM36Z8cuMX2b8MuOXGb/M+GXGlyRJkiRJknbwC+2jYyljORpZAAAAAElFTkSuQmCC">
+                                            (почта)
+                                        </span>
                                     </span>
-                                </span>
-                                <span v-else>
-                                    {{ item.name || item.uid }}
-                                </span>
-                            </small>
-                            <strong class="float-right">
-                                {{ item.score }}
-                            </strong>
+                                    <template v-else>
+                                        <strong v-if="item.name">
+                                            {{ item.name }}
+                                        </strong>
+                                        <span v-else>
+                                            {{ item.uid }}
+                                        </span>
+                                    </template>
+                                </small>
+                            </div>
+                            <div class="col-2 align-self-center">
+                                <strong class="float-right">
+                                    {{ item.score }}
+                                </strong>
+                            </div>
                         </div>
-                        <div class="text-muted mt-2">
+                        <div class="text-muted mt-1">
                             <small>
                                 {{ item.date.toDate().toLocaleString() }}
                             </small>
@@ -187,7 +206,7 @@
                             Ваш новый рекорд - ${score}!
 
                             Почта (не видна другим) та же?
-                            - свяжусь по ней если ты выиграешь 8$!)
+                            - свяжусь по ней если ты выиграешь $8
                             `, this.user.email)
                         } else {
                             email = prompt(
@@ -198,7 +217,7 @@
                             Попробуй еще!)
 
                             Укажи свою почту (не видна другим)
-                            - свяжусь по ней если ты выиграешь 8$!)
+                            - свяжусь по ней если ты выиграешь $8
                             `, '@gmail.com')
                         }
                     }
@@ -235,13 +254,24 @@
             },
 
             editName() {
-                const name = prompt('Введите имя')
+                const name = prompt('Введите имя', this.user.name)
                 if (name && name.length < 120) {
                     firebase.firestore()
                         .collection('users')
                         .doc(firebase.auth().currentUser.uid)
                         .update({name})
                     this.$set(this.user, 'name', name)
+                }
+            },
+
+            editEmail() {
+                const email = prompt('Введите почту. \n(свяжусь по ней если выиграете $8) ', this.user.email)
+                if (email && email.length < 120) {
+                    firebase.firestore()
+                        .collection('users')
+                        .doc(firebase.auth().currentUser.uid)
+                        .update({email})
+                    this.$set(this.user, 'email', email)
                 }
             }
         },

@@ -52,7 +52,9 @@
                     </small>
                 </div>
                 <ul v-else-if="activeView === views.rating.key" class="list-group">
-                    <li v-for="(item, idx) in users" :key="item.uid" class="list-group-item text-left">
+                    <li v-for="(item, idx) in users" :key="item.uid"
+                        class="list-group-item text-left"
+                        :class="{ 'bg-me': user && user.uid === item.uid }">
                         <div class="row">
                             <div class="col-2 align-self-center">
                                 <small class="badge badge-secondary mr-2"
@@ -323,7 +325,7 @@
     .list-group {
         margin: 0 auto;
         max-width: 404px;
-        max-height: 300px;
+        max-height: 500px;
         overflow-y: auto;
     }
 
@@ -340,5 +342,9 @@
         &:hover {
             cursor: pointer;
         }
+    }
+
+    .bg-me {
+        background: lightgrey;
     }
 </style>

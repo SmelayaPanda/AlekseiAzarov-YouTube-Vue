@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="text-muted mt-1">
-                            <small>
+                            <small v-if="item.date && item.date.toDate()">
                                 {{ item.date.toDate().toLocaleString() }}
                             </small>
                             <small v-if="item.time" class="float-right">
@@ -231,8 +231,11 @@
                                 time,
                                 date: firebase.firestore.FieldValue.serverTimestamp()
                             }, {merge: true})
+
                         this.$set(this.user, 'score', score)
                         this.$set(this.user, 'email', email)
+                        this.$set(this.user, 'time', time)
+                        this.$set(this.user, 'date', firebase.firestore.FieldValue.serverTimestamp())
                     }
                     firebase.firestore()
                         .collection('users')

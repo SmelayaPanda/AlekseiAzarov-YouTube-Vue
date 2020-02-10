@@ -27,6 +27,7 @@
         },
         methods: {
             start() {
+                const startTime = new Date().getTime()
                 const getRandomCell = () => this.cell * Math.round(Math.random() * Math.round(-1 + this.bound / this.cell))
                 let timer = true
                 const interval = () => {
@@ -37,7 +38,7 @@
                     }
                     if ((this.p[0][0] < 0 || this.p[0][1] < 0 || this.p[0][0] >= this.bound || this.p[0][1] >= this.bound) || // 1. bound rect
                         ([...new Set(this.snake.map(i => i[0] + '' + i[1]))].length !== this.snake.length)) { // 2. self crash
-                        this.$emit('game-over', this.score)
+                        this.$emit('game-over', this.score, new Date().getTime() - startTime)
                         clearTimeout(timer)
                         timer = null
                     }

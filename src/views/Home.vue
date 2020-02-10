@@ -39,40 +39,52 @@
                     <div class="text-muted">
                         <small>Результаты - 8 марта 2020г. 12:00 дня по МСК</small>
                         <br>
-                        <small>Набравших одинаковое кол-во очков рассудит рандом</small>
-                        <br>
                     </div>
                     <br>
 
+                    <p>Поделись сылкой на игру с другими</p>
+                    <small>Подписывайся на </small>
                     <a href="https://www.youtube.com/channel/UCJh2pGEkh1Y9hkf_LHMVn9A/featured?view_as=subscriber"
-                       target="_blank">
-                        YouTube
-                    </a>
+                       target="_blank">YouTube</a>
+                    <br>
+                    <small class="text-muted">
+                        - если интересуешься Vue.js
+                    </small>
                 </div>
                 <ul v-else-if="activeView === views.rating.key" class="list-group">
                     <li v-for="(item, idx) in users" :key="item.uid" class="list-group-item text-left">
-                        <small class="badge badge-secondary mr-2"
-                               :class="idx === 0 ? 'badge-success' : 'badge-secondary'">
-                            {{ idx + 1 }}
-                        </small>
-                        <small>
-                            <span v-if="user && user.uid === item.uid">
-                                <strong v-if="user.name">
-                                    {{ user.name }}
-                                </strong>
-                                <strong v-else>Вы</strong>
-                                <span @click="editName" class="edit-icon">
-                                    <img height="18"
-                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAACGUlEQVR4nO3avYoUQQBF4aOBgQ9gbCgKvoWRCGaiLyIIizf0VQQDA8HYSFNzEVPNDBYDYddocVGXnZmu7mvPnA8q7J6qU13N7A9IkiRJOjRX2hNYgbvAQ+AecBO4AXwHvgLvgTfAW+BnaX576zbwGjjdYHwCnuADPcwj4JjN4p8fL4HrhfnulSO2D39+fMBN2FmYFv9svMLX0dbCmPhn4/Gis1+5MDb+KfAZuLbgGlYrjI9/Nh5c9uFXR65kpX7MeO/7M957r4R5TsDHBdewek8ZvwHfFl3BHghjN2DO19veGnkSviw79f0RxmzAu4Xn/d8K8GLLa0achGfTp75+4XeQTLh223EC3Jk499ULf4dZ6iS8mjz7lQsXx8nAe/1rHAO3pk1/3cLlkeY6CScc+C/iwuZPama499G06a9b2P5dPfIkPJ+6gDULu39jGbEJxp84pmyC8QeN7PDZ216zV8K4+LuehIMVxsd3EzYU5ovvJlwizB/fTbhAWC6+m/CHsHz82TdhLf8VEbrftQ/6T4uh9+Sf4g9Zxm8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8yfpnxy4xfZvwy45cZv8z4ZcYvM36Z8cuMX2b8MuOXGb/M+GXGlyRJkiRJknbwC+2jYyljORpZAAAAAElFTkSuQmCC">
+                        <div>
+                            <small class="badge badge-secondary mr-2"
+                                   :class="idx === 0 ? 'badge-success' : 'badge-secondary'">
+                                {{ idx + 1 }} <br> место
+                            </small>
+                            <small class="align-middle">
+                                <span v-if="user && user.uid === item.uid">
+                                    <strong v-if="user.name">
+                                        {{ user.name }}
+                                    </strong>
+                                    <strong v-else>Вы</strong>
+                                    <span @click="editName" class="edit-icon">
+                                        <img height="18"
+                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAACGUlEQVR4nO3avYoUQQBF4aOBgQ9gbCgKvoWRCGaiLyIIizf0VQQDA8HYSFNzEVPNDBYDYddocVGXnZmu7mvPnA8q7J6qU13N7A9IkiRJOjRX2hNYgbvAQ+AecBO4AXwHvgLvgTfAW+BnaX576zbwGjjdYHwCnuADPcwj4JjN4p8fL4HrhfnulSO2D39+fMBN2FmYFv9svMLX0dbCmPhn4/Gis1+5MDb+KfAZuLbgGlYrjI9/Nh5c9uFXR65kpX7MeO/7M957r4R5TsDHBdewek8ZvwHfFl3BHghjN2DO19veGnkSviw79f0RxmzAu4Xn/d8K8GLLa0achGfTp75+4XeQTLh223EC3Jk499ULf4dZ6iS8mjz7lQsXx8nAe/1rHAO3pk1/3cLlkeY6CScc+C/iwuZPama499G06a9b2P5dPfIkPJ+6gDULu39jGbEJxp84pmyC8QeN7PDZ216zV8K4+LuehIMVxsd3EzYU5ovvJlwizB/fTbhAWC6+m/CHsHz82TdhLf8VEbrftQ/6T4uh9+Sf4g9Zxm8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8Jxq8yfpnxy4xfZvwy45cZv8z4ZcYvM36Z8cuMX2b8MuOXGb/M+GXGlyRJkiRJknbwC+2jYyljORpZAAAAAElFTkSuQmCC">
+                                    </span>
                                 </span>
-                            </span>
-                            <span v-else>
-                                {{ item.name || item.uid }}
-                            </span>
-                        </small>
-                        <strong class="float-right">
-                            {{ item.score }}
-                        </strong>
+                                <span v-else>
+                                    {{ item.name || item.uid }}
+                                </span>
+                            </small>
+                            <strong class="float-right">
+                                {{ item.score }}
+                            </strong>
+                        </div>
+                        <div class="text-muted mt-2">
+                            <small>
+                                {{ item.date.toDate().toLocaleString() }}
+                            </small>
+                            <small v-if="item.time" class="float-right">
+                                Время: {{ item.time / 1000 }}
+                            </small>
+                        </div>
                     </li>
                 </ul>
 
@@ -80,7 +92,8 @@
                     <a href="https://gist.github.com/SmelayaPanda/ed5db80a8af5a90a9885de64782aa247" target="_blank">
                         Исходный код
                     </a>
-                    <small>(* без ускорения после сьеденого яблока)</small>
+                    <br>
+                    <small>(* без ускорения после сьеденого яблока и чуть упрощенный)</small>
                 </div>
             </template>
         </div>
@@ -147,11 +160,17 @@
                             arr.push({uid: doc.id, ...doc.data()})
                         })
 
-                        this.users = arr.sort((a, b) => b.score - a.score)
+                        this.users = arr.sort((a, b) => {
+                            if (b.score === a.score) {
+                                return a.time - b.time
+                            } else {
+                                return b.score - a.score
+                            }
+                        })
                     })
             },
 
-            onGameOver(score) {
+            onGameOver(score, time) {
                 this.isStarted = false
                 let email
                 if (this.user && this.user.uid) {
@@ -187,7 +206,12 @@
                         firebase.firestore()
                             .collection('users')
                             .doc(firebase.auth().currentUser.uid || Math.random())
-                            .set({email, score, date: firebase.firestore.FieldValue.serverTimestamp()}, {merge: true})
+                            .set({
+                                email,
+                                score,
+                                time,
+                                date: firebase.firestore.FieldValue.serverTimestamp()
+                            }, {merge: true})
                         this.$set(this.user, 'score', score)
                         this.$set(this.user, 'email', email)
                     }
